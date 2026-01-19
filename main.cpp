@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_PRODOTTI = 50;
+constexpr int MAX_PRODOTTI = 50;
 
 // parte 1
 void caricaMagazzino(int magazzino[], int n) {
     for (int i = 0; i < n; i++) {
-        cout << "Quantità del prodotto " << i << ": ";
+        cout << "Quantita' del prodotto " << i << ": ";
         cin >> magazzino[i];
     }
 }
@@ -18,7 +18,7 @@ void visualizzaStato(int magazzino[], int n) {
     }
 }
 
-int calcolaTotale(int magazzino[], int n) {
+int calcolaTotale(const int magazzino[], int n) {
     int totale = 0;
     for (int i = 0; i < n; i++) {
         totale += magazzino[i];
@@ -27,7 +27,7 @@ int calcolaTotale(int magazzino[], int n) {
 }
 
 // parte 2
-int prodottoScarsita(int magazzino[], int n) {
+int prodottoScarsita(const int magazzino[], int n) {
     int indiceMin = 0;
     for (int i = 1; i < n; i++) {
         if (magazzino[i] < magazzino[indiceMin]) {
@@ -53,20 +53,20 @@ double mediaPezzi(int magazzino[], int n) {
 // parte 3
 void vendiProdotto(int magazzino[], int indice, int quantita) {
     if (indice < 0 || indice >= MAX_PRODOTTI) {
-        cout << "Indice non valido!\n";
+        cout << "Indice non valido\n";
         return;
     }
     if (magazzino[indice] >= quantita) {
         magazzino[indice] -= quantita;
         cout << "Vendita effettuata.\n";
     } else {
-        cout << "Errore: quantità non disponibile!\n";
+        cout << "Errore: quantita' non disponibile\n";
     }
 }
 
 void rifornimento(int magazzino[], int indice, int quantita) {
     if (indice < 0 || indice >= MAX_PRODOTTI) {
-        cout << "Indice non valido!\n";
+        cout << "Indice non valido\n";
         return;
     }
     magazzino[indice] += quantita;
@@ -81,7 +81,7 @@ int main() {
     cin >> n;
 
     if (n < 1 || n > MAX_PRODOTTI) {
-        cout << "Numero non valido!";
+        cout << "Numero non valido";
         return 0;
     }
 
@@ -92,7 +92,7 @@ int main() {
         cout << "\n--- MENU ---\n";
         cout << "1. Visualizza stato\n";
         cout << "2. Calcola totale\n";
-        cout << "3. Prodotto con scarsità\n";
+        cout << "3. Prodotto con scarsita'\n";
         cout << "4. Prodotti sotto scorta\n";
         cout << "5. Media pezzi\n";
         cout << "6. Vendi prodotto\n";
@@ -125,7 +125,7 @@ int main() {
                 int indice, q;
                 cout << "Indice prodotto: ";
                 cin >> indice;
-                cout << "Quantità da vendere: ";
+                cout << "Quantita' da vendere: ";
                 cin >> q;
                 vendiProdotto(magazzino, indice, q);
                 break;
@@ -134,16 +134,16 @@ int main() {
                 int indice, q;
                 cout << "Indice prodotto: ";
                 cin >> indice;
-                cout << "Quantità da aggiungere: ";
+                cout << "Quantita' da aggiungere: ";
                 cin >> q;
                 rifornimento(magazzino, indice, q);
                 break;
             }
             case 0:
-                cout << "Uscita...\n";
+                cout << "Uscita\n";
                 break;
             default:
-                cout << "Scelta non valida!\n";
+                cout << "Scelta non valida\n";
         }
 
     } while (scelta != 0);
